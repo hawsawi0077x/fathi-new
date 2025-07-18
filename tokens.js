@@ -43,8 +43,8 @@ module.exports = [
       status: "invisible",
     },
     selfMute: false,
-  }
-   {
+  },
+  {
     channelId: "1394770446896861284",
     serverId: "1346788139724963840",
     token: process.env.token4,
@@ -58,8 +58,8 @@ module.exports = [
       status: "invisible",
     },
     selfMute: false,
-  }
-   {
+  },
+  {
     channelId: "1394770446896861284",
     serverId: "1346788139724963840",
     token: process.env.token5,
