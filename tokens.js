@@ -16,7 +16,7 @@ module.exports = [
   },
   {
     channelId: "1185755697024086106",
-    serverId: "1133667699151618130",
+    serverId: "1133667699151618130", 
     token: process.env.token2,
     selfDeaf: false,
     autoReconnect: {
@@ -30,8 +30,8 @@ module.exports = [
     selfMute: false,
   },
   {
-    channelId: "1394770446896861284",
-    serverId: "1346788139724963840",
+    channelId: "1395923052545577040",
+    serverId: "1394436161182629998",
     token: process.env.token3,
     selfDeaf: false,
     autoReconnect: {
