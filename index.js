@@ -42,7 +42,7 @@ const cleanTokens = tokens.filter((t) => t?.token?.length > 30);
       channelId: tokenConfig.channelId,
       selfMute: tokenConfig.selfMute ?? true,
       selfDeaf: tokenConfig.selfDeaf ?? true,
-      autoReconnect: tokenConfig.autoReconnect || { enabled: false },
+      autoReconnect: tokenConfig.autoReconnect || { enabled: true, delay: 30000, maxRetries: 5 },
       presence: tokenConfig.presence,
     });
 
@@ -52,17 +52,9 @@ const cleanTokens = tokens.filter((t) => t?.token?.length > 30);
 
     client.on('connected', () => console.log('🌐 Connected to Discord'));
 
-    client.on('disconnected', async () => {
-      console.log('❌ Disconnected — retrying after delay...');
-      const delayMs = randomDelay(30000, 60000);
-      await wait(delayMs);
-      try {
-        if (!client.connected) {
-          await client.connect();
-        }
-      } catch (e) {
-        console.error('❗ Reconnect failed:', e);
-      }
+    client.on('disconnected', () => {
+      console.log('❌ Disconnected');
+      // لا داعي لإعادة الاتصال من هنا لأن client.js فيه autoReconnect
     });
 
     client.on('voiceReady', () => console.log('🔊 Voice is ready'));
@@ -70,13 +62,11 @@ const cleanTokens = tokens.filter((t) => t?.token?.length > 30);
     client.on('debug', (msg) => console.debug(msg));
 
     try {
-      if (!client.connected) {
-        await client.connect();
-      }
+      await client.connect();
     } catch (e) {
       console.error('❗ Initial connect failed:', e);
     }
 
-    await wait(randomDelay(6000, 12000));
+    await wait(randomDelay(6000, 12000)); // تأخير عشوائي لتجنب identify rate limit
   }
 })();
